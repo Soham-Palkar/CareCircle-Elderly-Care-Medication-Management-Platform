@@ -26,21 +26,22 @@ settings = get_settings()
 
 
 def _set_auth_cookies(response: Response, access_token: str, refresh_token: str) -> None:
+    current_settings = get_settings()
     response.set_cookie(
         key="access_token",
         value=access_token,
         httponly=True,
-        secure=settings.is_production,
-        samesite="lax",
-        max_age=settings.access_token_minutes * 60,
+        secure=current_settings.effective_cookie_secure,
+        samesite=current_settings.cookie_samesite,
+        max_age=current_settings.access_token_minutes * 60,
     )
     response.set_cookie(
         key="refresh_token",
         value=refresh_token,
         httponly=True,
-        secure=settings.is_production,
-        samesite="lax",
-        max_age=settings.refresh_token_days * 86400,
+        secure=current_settings.effective_cookie_secure,
+        samesite=current_settings.cookie_samesite,
+        max_age=current_settings.refresh_token_days * 86400,
     )
 
 

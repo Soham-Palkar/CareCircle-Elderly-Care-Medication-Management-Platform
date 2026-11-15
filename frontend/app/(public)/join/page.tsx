@@ -11,10 +11,10 @@ import { Input } from '@/components/ui/Input';
 
 export default function JoinCirclePage() {
   const router = useRouter();
-  const [inviteCode, setInviteCode] = useState('INV-FAMILY-4821');
-  const [displayName, setDisplayName] = useState('Priya Sharma');
-  const [passcode, setPasscode] = useState('654321');
-  const [confirmPasscode, setConfirmPasscode] = useState('654321');
+  const [inviteCode, setInviteCode] = useState('');
+  const [displayName, setDisplayName] = useState('');
+  const [passcode, setPasscode] = useState('');
+  const [confirmPasscode, setConfirmPasscode] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 

@@ -18,7 +18,15 @@ from app.models.schedule import MedicationSchedule
 from app.models.dose_event import DoseEvent, DoseState, DoseRecordedVia
 
 
+def check_not_production() -> None:
+    env = os.environ.get("APP_ENV", os.environ.get("ENV", "dev")).strip().lower()
+    if env in ("prod", "production"):
+        print("ERROR: Safety Guard: create_demo_events.py cannot be executed in a production environment (APP_ENV=production). Aborting.")
+        sys.exit(1)
+
+
 async def create_demo_event() -> None:
+    check_not_production()
     async with AsyncSessionLocal() as session:
         # Find active medication schedule
         res = await session.execute(

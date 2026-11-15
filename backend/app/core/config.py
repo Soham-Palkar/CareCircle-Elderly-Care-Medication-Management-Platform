@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 from functools import lru_cache
-from typing import List
+import os
+from typing import List, Optional
+from typing_extensions import Self
 
-from pydantic import field_validator
+from pydantic import Field, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -16,17 +18,28 @@ class Settings(BaseSettings):
         extra="ignore",
     )
 
-    # Database
-    database_url: str = "postgresql+asyncpg://carecircle:carecircle@db:5432/carecircle"
+    # Runtime environment
+    env: str = Field(default="dev", alias="ENV")
+    app_env: str = Field(default="dev", alias="APP_ENV")
 
-    # JWT
-    jwt_secret: str = "change-me-to-64-random-chars"
-    action_token_secret: str = "change-me-to-64-random-chars"
+    # Database (Accepts production PostgreSQL connection string)
+    database_url: str = Field(
+        default="postgresql+asyncpg://carecircle:carecircle@db:5432/carecircle",
+        alias="DATABASE_URL",
+    )
+
+    # JWT / Secrets
+    jwt_secret: str = Field(default="change-me-to-64-random-chars", alias="JWT_SECRET")
+    action_token_secret: str = Field(default="change-me-to-64-random-chars", alias="ACTION_TOKEN_SECRET")
     access_token_minutes: int = 30
     refresh_token_days: int = 7
 
+    # Cookies
+    cookie_secure: Optional[bool] = None
+    cookie_samesite: str = Field(default="lax", alias="COOKIE_SAMESITE")
+
     # CORS
-    cors_origins: List[str] = ["http://localhost:3000"]
+    cors_origins: List[str] = Field(default=["http://localhost:3000"], alias="CORS_ORIGINS")
 
     @field_validator("cors_origins", mode="before")
     @classmethod
@@ -59,12 +72,36 @@ class Settings(BaseSettings):
     reminder_lead_minutes: int = 30
     default_grace_minutes: int = 60
 
-    # Runtime environment
-    env: str = "dev"
-
     @property
     def is_production(self) -> bool:
-        return self.env == "prod"
+        env_val = (self.app_env or self.env or os.environ.get("APP_ENV") or os.environ.get("ENV") or "dev").lower()
+        return env_val in ("prod", "production")
+
+    @property
+    def effective_cookie_secure(self) -> bool:
+        if self.cookie_secure is not None:
+            return self.cookie_secure
+        return self.is_production
+
+    @model_validator(mode="after")
+    def validate_production_configuration(self) -> Self:
+        """Enforce strict secret and database requirements in production."""
+        if self.is_production:
+            if not self.jwt_secret or "change-me" in self.jwt_secret or len(self.jwt_secret) < 32:
+                raise ValueError(
+                    "Insecure configuration: In production (APP_ENV=production), JWT_SECRET must be "
+                    "set via environment variable to a secure random string of at least 32 characters."
+                )
+            if not self.action_token_secret or "change-me" in self.action_token_secret or len(self.action_token_secret) < 32:
+                raise ValueError(
+                    "Insecure configuration: In production (APP_ENV=production), ACTION_TOKEN_SECRET must be "
+                    "set via environment variable to a secure random string of at least 32 characters."
+                )
+            if "@db:5432" in self.database_url:
+                raise ValueError(
+                    "Insecure configuration: In production, DATABASE_URL must not use the local docker-compose default."
+                )
+        return self
 
 
 @lru_cache(maxsize=1)

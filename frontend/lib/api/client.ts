@@ -61,6 +61,7 @@ class ApiClient {
     try {
       const res = await fetch(`${BASE_URL}${endpoint}`, {
         ...options,
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
           ...options?.headers,
@@ -76,78 +77,131 @@ class ApiClient {
       }
 
       return (await res.json()) as T;
-    } catch {
-      // Backend not running or offline: safely return grounded mock fallback
-      if (fallbackValue !== undefined) {
+    } catch (err: unknown) {
+      // If error is an ApiError returned by the server, never hide it with mock data
+      const maybeApiError = err as ApiError;
+      if (maybeApiError && maybeApiError.code && maybeApiError.code !== 'NETWORK_ERROR') {
+        throw maybeApiError;
+      }
+
+      // Backend unreachable: only in development mode allow safe mock fallback
+      const isDev = process.env.NODE_ENV !== 'production';
+      if (isDev && fallbackValue !== undefined) {
         return fallbackValue;
       }
-      throw {
-        code: 'NETWORK_ERROR',
-        message: 'Could not connect to CareCircle service.',
-      };
+
+      throw (
+        maybeApiError || {
+          code: 'NETWORK_ERROR',
+          message: 'Could not connect to CareCircle service. Please ensure the backend server is running.',
+        }
+      );
     }
   }
 
   // --- Auth & Circle ---
   async login(circleCode: string, passcode: string): Promise<{ token: string; member: Member; circle: CareCircle }> {
-    // For local demo, match passcode or check backend
-    try {
-      return await this.fetchWithFallback('/auth/login', {
-        method: 'POST',
-        body: JSON.stringify({ circleCode, passcode }),
-      });
-    } catch {
-      // Demo authentication: match passcode to role for the shared demo circle.
-      // Each member has a distinct demo passcode so reviewers can experience every role.
-      //   Elder      → 111111  (Savitri Devi)
-      //   Caretaker  → 222222  (Rajesh Sharma)
-      //   Family     → 333333  (Priya Sharma)
-      //   Doctor     → 444444  (Dr. Anand Mehta)
-      // Any other passcode defaults to the elder view.
-      const demoPasscodeMap: Record<string, number> = {
-        '111111': 0, // elder
-        '222222': 1, // caretaker
-        '333333': 2, // family
-        '444444': 3, // doctor
-      };
-      const memberIndex = demoPasscodeMap[passcode.trim()] ?? 0;
-      const member = this.inMemoryMembers[memberIndex] ?? this.inMemoryMembers[0];
-      return {
-        token: `demo-jwt-token-${member.role}`,
-        member,
-        circle: mockCircle,
-      };
-    }
+    const res = await this.fetchWithFallback<{
+      member_id: string;
+      circle_id: string;
+      role: Role;
+      display_name: string;
+      circle_name: string;
+    }>('/auth/login', {
+      method: 'POST',
+      body: JSON.stringify({
+        circle_code: circleCode.trim().toUpperCase(),
+        passcode: passcode.trim(),
+      }),
+    });
+
+    const member: Member = {
+      id: res.member_id,
+      circleId: res.circle_id,
+      displayName: res.display_name,
+      role: res.role,
+      isActive: true,
+      createdAt: new Date().toISOString(),
+    };
+    const circle: CareCircle = {
+      id: res.circle_id,
+      name: res.circle_name,
+      circleCode: circleCode.trim().toUpperCase(),
+      createdAt: new Date().toISOString(),
+    };
+
+    return {
+      token: 'session-cookie',
+      member,
+      circle,
+    };
   }
 
   async createCircle(data: { circleName: string; elderName: string; passcode: string }): Promise<{ circle: CareCircle; member: Member }> {
-    const newCircle: CareCircle = {
-      id: `circle-${Date.now()}`,
+    const res = await this.fetchWithFallback<{
+      circle_id: string;
+      circle_code: string;
+      member_id: string;
+      display_name: string;
+      role: Role;
+    }>('/auth/circles', {
+      method: 'POST',
+      body: JSON.stringify({
+        circle_name: data.circleName.trim(),
+        elder_name: data.elderName.trim(),
+        passcode: data.passcode.trim(),
+      }),
+    });
+
+    const circle: CareCircle = {
+      id: res.circle_id,
       name: data.circleName,
-      circleCode: `CARE-${Math.floor(1000 + Math.random() * 9000)}`,
+      circleCode: res.circle_code,
       createdAt: new Date().toISOString(),
     };
-    const newMember: Member = {
-      id: `mem-${Date.now()}`,
-      circleId: newCircle.id,
-      displayName: data.elderName,
-      role: 'elder',
+    const member: Member = {
+      id: res.member_id,
+      circleId: res.circle_id,
+      displayName: res.display_name,
+      role: res.role,
       isActive: true,
       createdAt: new Date().toISOString(),
     };
-    return { circle: newCircle, member: newMember };
+
+    return { circle, member };
   }
 
   async joinCircle(inviteCode: string, passcode: string, displayName: string): Promise<{ member: Member; circle: CareCircle }> {
+    const res = await this.fetchWithFallback<{
+      member_id: string;
+      circle_id: string;
+      role: Role;
+      display_name: string;
+    }>('/auth/invites/redeem', {
+      method: 'POST',
+      body: JSON.stringify({
+        invite_code: inviteCode.trim(),
+        passcode: passcode.trim(),
+        display_name: displayName.trim(),
+      }),
+    });
+
     const member: Member = {
-      id: `mem-${Date.now()}`,
-      circleId: mockCircle.id,
-      displayName,
-      role: 'family',
+      id: res.member_id,
+      circleId: res.circle_id,
+      displayName: res.display_name,
+      role: res.role,
       isActive: true,
       createdAt: new Date().toISOString(),
     };
-    return { member, circle: mockCircle };
+    const circle: CareCircle = {
+      id: res.circle_id,
+      name: 'Care Circle',
+      circleCode: '',
+      createdAt: new Date().toISOString(),
+    };
+
+    return { member, circle };
   }
 
   // --- Doses ---

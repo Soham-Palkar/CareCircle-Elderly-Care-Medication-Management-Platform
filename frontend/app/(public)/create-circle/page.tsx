@@ -12,11 +12,11 @@ import { Input } from '@/components/ui/Input';
 export default function CreateCirclePage() {
   const router = useRouter();
   const [step, setStep] = useState<'form' | 'created'>('form');
-  const [circleName, setCircleName] = useState('Devi Family Care');
-  const [elderName, setElderName] = useState('Savitri Devi');
-  const [passcode, setPasscode] = useState('123456');
-  const [confirmPasscode, setConfirmPasscode] = useState('123456');
-  const [createdCircleCode, setCreatedCircleCode] = useState('CARE-8921');
+  const [circleName, setCircleName] = useState('');
+  const [elderName, setElderName] = useState('');
+  const [passcode, setPasscode] = useState('');
+  const [confirmPasscode, setConfirmPasscode] = useState('');
+  const [createdCircleCode, setCreatedCircleCode] = useState('');
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);

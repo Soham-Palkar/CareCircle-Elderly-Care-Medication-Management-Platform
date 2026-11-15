@@ -19,7 +19,15 @@ from app.models.recipient import CareRecipient
 from app.models.health_reading import HealthReading, ReadingKind, ReadingSource
 
 
+def check_not_production() -> None:
+    env = os.environ.get("APP_ENV", os.environ.get("ENV", "dev")).strip().lower()
+    if env in ("prod", "production"):
+        print("ERROR: Safety Guard: simulate_readings.py cannot be executed in a production environment (APP_ENV=production). Aborting.")
+        sys.exit(1)
+
+
 async def simulate_once() -> None:
+    check_not_production()
     async with AsyncSessionLocal() as session:
         # Find recipient
         res = await session.execute(select(CareRecipient))
