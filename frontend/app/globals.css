@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 38 33% 97%;
+    --foreground: 30 25% 14%;
+    --card: 0 0% 100%;
+    --card-foreground: 30 25% 14%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 30 25% 14%;
+    --primary: 23 54% 54%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 35 25% 93%;
+    --secondary-foreground: 30 25% 14%;
+    --muted: 35 20% 90%;
+    --muted-foreground: 30 18% 46%;
+    --accent: 35 30% 93%;
+    --accent-foreground: 30 25% 14%;
+    --destructive: 0 54% 48%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 33 22% 80%;
+    --input: 33 22% 80%;
+    --ring: 23 54% 54%;
+    --radius: 1rem;
+  }
+
+  html {
+    /* Base font size: 18px minimum for general accessibility */
+    font-size: 18px;
+    color: #2D2318;
+    background-color: #FAF8F5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    min-height: 100vh;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+  }
+
+  /* Elderly Mode scale: strict 24px+ base font with generous line height */
+  .elder-text-mode {
+    font-size: 24px !important;
+    line-height: 1.6 !important;
+  }
+
+  .elder-text-mode h1 {
+    font-size: 42px !important;
+    line-height: 1.2 !important;
+  }
+
+  .elder-text-mode h2 {
+    font-size: 32px !important;
+    line-height: 1.3 !important;
+  }
+
+  .elder-text-mode h3 {
+    font-size: 28px !important;
+  }
+
+  .elder-text-mode p,
+  .elder-text-mode span,
+  .elder-text-mode button,
+  .elder-text-mode a,
+  .elder-text-mode input {
+    font-size: 24px !important;
+  }
+
+  .large-text-mode {
+    font-size: 20px !important;
+  }
+
+  /* Safe interactive touch targets: minimum 48x48px across all roles */
+  button,
+  a,
+  input,
+  select {
+    min-height: 48px;
+  }
+
+  /* Reduced Motion Support */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
