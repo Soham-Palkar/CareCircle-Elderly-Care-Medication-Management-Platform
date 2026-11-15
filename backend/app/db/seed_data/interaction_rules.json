@@ -1,0 +1,92 @@
+[
+  {
+    "drug_a": "Warfarin",
+    "drug_b": "Aspirin",
+    "severity": "high",
+    "note": "Advisory only: concurrent use significantly increases the risk of major bleeding. Always confirm with the prescribing doctor."
+  },
+  {
+    "drug_a": "Amlodipine",
+    "drug_b": "Simvastatin",
+    "severity": "moderate",
+    "note": "Advisory only: Amlodipine may increase serum concentrations of Simvastatin, increasing risk of myopathy."
+  },
+  {
+    "drug_a": "Metformin",
+    "drug_b": "Furosemide",
+    "severity": "moderate",
+    "note": "Advisory only: Furosemide may alter blood glucose control and Metformin plasma levels. Monitor closely."
+  },
+  {
+    "drug_a": "Lisinopril",
+    "drug_b": "Spironolactone",
+    "severity": "high",
+    "note": "Advisory only: combining ACE inhibitors and potassium-sparing diuretics may result in severe hyperkalemia."
+  },
+  {
+    "drug_a": "Ciprofloxacin",
+    "drug_b": "Antacids",
+    "severity": "moderate",
+    "note": "Advisory only: magnesium/aluminum antacids drastically reduce Ciprofloxacin absorption. Take at least 2 hours apart."
+  },
+  {
+    "drug_a": "Levothyroxine",
+    "drug_b": "Calcium Carbonate",
+    "severity": "moderate",
+    "note": "Advisory only: Calcium binds Levothyroxine in the GI tract, reducing its absorption. Separate by at least 4 hours."
+  },
+  {
+    "drug_a": "Digoxin",
+    "drug_b": "Amiodarone",
+    "severity": "high",
+    "note": "Advisory only: Amiodarone significantly increases Digoxin levels, potentially leading to digitalis toxicity."
+  },
+  {
+    "drug_a": "Clopidogrel",
+    "drug_b": "Omeprazole",
+    "severity": "moderate",
+    "note": "Advisory only: Omeprazole may reduce the antiplatelet effect of Clopidogrel by inhibiting CYP2C19."
+  },
+  {
+    "drug_a": "Ibuprofen",
+    "drug_b": "Lisinopril",
+    "severity": "moderate",
+    "note": "Advisory only: NSAIDs may diminish the antihypertensive effect of ACE inhibitors and increase renal impairment risk."
+  },
+  {
+    "drug_a": "Tramadol",
+    "drug_b": "Sertraline",
+    "severity": "high",
+    "note": "Advisory only: co-administration increases the risk of serotonin syndrome and lowers seizure threshold."
+  },
+  {
+    "drug_a": "Atorvastatin",
+    "drug_b": "Clarithromycin",
+    "severity": "high",
+    "note": "Advisory only: Clarithromycin inhibits CYP3A4, substantially increasing Atorvastatin levels and risk of rhabdomyolysis."
+  },
+  {
+    "drug_a": "Sildenafil",
+    "drug_b": "Nitroglycerin",
+    "severity": "high",
+    "note": "Advisory only: combination causes life-threatening hypotension and is strictly contraindicated."
+  },
+  {
+    "drug_a": "Methotrexate",
+    "drug_b": "Amoxicillin",
+    "severity": "moderate",
+    "note": "Advisory only: penicillins can reduce renal clearance of Methotrexate, increasing its toxicity."
+  },
+  {
+    "drug_a": "Alprazolam",
+    "drug_b": "Zolpidem",
+    "severity": "high",
+    "note": "Advisory only: concurrent CNS depressants elevate risk of severe sedation, respiratory depression, and falls in elderly."
+  },
+  {
+    "drug_a": "Paracetamol",
+    "drug_b": "Alcohol",
+    "severity": "moderate",
+    "note": "Advisory only: chronic alcohol intake increases the risk of hepatotoxicity with Paracetamol (Acetaminophen)."
+  }
+]

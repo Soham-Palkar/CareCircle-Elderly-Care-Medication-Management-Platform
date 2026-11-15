@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>CareCircle Missed Dose Alert</title>
+</head>
+<body style="font-family: sans-serif; background-color: #FAF8F5; color: #2D2318; padding: 24px;">
+    <div style="max-width: 560px; margin: 0 auto; background: #ffffff; border-radius: 12px; border: 1px solid #EBE4DB; padding: 24px;">
+        <h2 style="color: #B54B2E; margin-top: 0;">CareCircle Attention Needed</h2>
+        <p style="font-size: 16px;">Hello,</p>
+        <p style="font-size: 18px; font-weight: bold; color: #B54B2E;">A scheduled dose has not been confirmed: {{ medication_name }}</p>
+        <p style="font-size: 14px; color: #5C4A38;">This dose was scheduled for {{ scheduled_time }} and has passed the normal grace window.</p>
+        <p style="font-size: 14px; color: #5C4A38;">Please check in with the care recipient to ensure their well-being.</p>
+        <hr style="border: 0; border-top: 1px solid #EBE4DB; margin: 24px 0;">
+        <p style="font-size: 12px; color: #8B6C55;">CareCircle is an assistive reminder tool, not a diagnostic or medical device. Always consult your healthcare provider for medical advice.</p>
+    </div>
+</body>
+</html>
