@@ -1,11 +1,6 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/(public)/login/page": "app/(public)/login/page.js",
   "/page": "app/page.js",
-  "/(public)/join/page": "app/(public)/join/page.js",
-  "/(public)/create-circle/page": "app/(public)/create-circle/page.js",
-  "/elder/voice/page": "app/elder/voice/page.js",
-  "/elder/people/page": "app/elder/people/page.js",
-  "/elder/page": "app/elder/page.js",
-  "/family/page": "app/family/page.js"
+  "/(public)/login/page": "app/(public)/login/page.js",
+  "/elder/people/page": "app/elder/people/page.js"
 }

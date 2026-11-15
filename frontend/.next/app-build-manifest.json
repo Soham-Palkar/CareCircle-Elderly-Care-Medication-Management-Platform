@@ -1,9 +1,9 @@
 {
   "pages": {
-    "/elder/page": [
+    "/elder/people/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/elder/page.js"
+      "static/chunks/app/elder/people/page.js"
     ],
     "/elder/layout": [
       "static/chunks/webpack.js",
@@ -16,26 +16,6 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/elder/help/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/elder/help/page.js"
-    ],
-    "/elder/today/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/elder/today/page.js"
-    ],
-    "/elder/voice/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/elder/voice/page.js"
-    ],
-    "/elder/people/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/elder/people/page.js"
-    ],
     "/(public)/login/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -45,26 +25,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/page.js"
-    ],
-    "/(public)/join/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(public)/join/page.js"
-    ],
-    "/family/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/family/page.js"
-    ],
-    "/family/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/family/layout.js"
-    ],
-    "/(public)/create-circle/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(public)/create-circle/page.js"
     ],
     "/_not-found/page": [
       "static/chunks/webpack.js",

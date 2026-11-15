@@ -688,6 +688,9 @@ video {
 .ml-3 {
   margin-left: 0.75rem;
 }
+.ml-auto {
+  margin-left: auto;
+}
 .mr-0\.5 {
   margin-right: 0.125rem;
 }
@@ -1193,6 +1196,18 @@ video {
 .border-dashed {
   border-style: dashed;
 }
+.border-\[\#3B6B8A\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(59 107 138 / var(--tw-border-opacity, 1));
+}
+.border-\[\#5B7C5A\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(91 124 90 / var(--tw-border-opacity, 1));
+}
+.border-\[\#7B5EA7\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(123 94 167 / var(--tw-border-opacity, 1));
+}
 .border-\[\#81C784\] {
   --tw-border-opacity: 1;
   border-color: rgb(129 199 132 / var(--tw-border-opacity, 1));
@@ -1302,13 +1317,25 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(45 106 79 / var(--tw-bg-opacity, 1));
 }
+.bg-\[\#3B6B8A\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(59 107 138 / var(--tw-bg-opacity, 1));
+}
 .bg-\[\#3D2F22\] {
   --tw-bg-opacity: 1;
   background-color: rgb(61 47 34 / var(--tw-bg-opacity, 1));
 }
+.bg-\[\#5B7C5A\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(91 124 90 / var(--tw-bg-opacity, 1));
+}
 .bg-\[\#5C8C5A\] {
   --tw-bg-opacity: 1;
   background-color: rgb(92 140 90 / var(--tw-bg-opacity, 1));
+}
+.bg-\[\#7B5EA7\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(123 94 167 / var(--tw-bg-opacity, 1));
 }
 .bg-\[\#8B2500\] {
   --tw-bg-opacity: 1;
@@ -1358,6 +1385,18 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(232 245 233 / var(--tw-bg-opacity, 1));
 }
+.bg-\[\#EBE4DB\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(235 228 219 / var(--tw-bg-opacity, 1));
+}
+.bg-\[\#EBF3F9\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(235 243 249 / var(--tw-bg-opacity, 1));
+}
+.bg-\[\#EEF4EE\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(238 244 238 / var(--tw-bg-opacity, 1));
+}
 .bg-\[\#EEF5EE\] {
   --tw-bg-opacity: 1;
   background-color: rgb(238 245 238 / var(--tw-bg-opacity, 1));
@@ -1373,6 +1412,10 @@ video {
 .bg-\[\#F2EDE6\] {
   --tw-bg-opacity: 1;
   background-color: rgb(242 237 230 / var(--tw-bg-opacity, 1));
+}
+.bg-\[\#F4F0FA\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(244 240 250 / var(--tw-bg-opacity, 1));
 }
 .bg-\[\#F5EDE0\] {
   --tw-bg-opacity: 1;
@@ -1776,6 +1819,9 @@ video {
 .tracking-wider {
   letter-spacing: 0.05em;
 }
+.tracking-widest {
+  letter-spacing: 0.1em;
+}
 .text-\[\#0088CC\] {
   --tw-text-opacity: 1;
   color: rgb(0 136 204 / var(--tw-text-opacity, 1));
@@ -1792,9 +1838,17 @@ video {
   --tw-text-opacity: 1;
   color: rgb(30 58 138 / var(--tw-text-opacity, 1));
 }
+.text-\[\#1E4A6B\] {
+  --tw-text-opacity: 1;
+  color: rgb(30 74 107 / var(--tw-text-opacity, 1));
+}
 .text-\[\#2D2318\] {
   --tw-text-opacity: 1;
   color: rgb(45 35 24 / var(--tw-text-opacity, 1));
+}
+.text-\[\#2D5A2C\] {
+  --tw-text-opacity: 1;
+  color: rgb(45 90 44 / var(--tw-text-opacity, 1));
 }
 .text-\[\#2D6A4F\] {
   --tw-text-opacity: 1;
@@ -1803,6 +1857,10 @@ video {
 .text-\[\#423223\] {
   --tw-text-opacity: 1;
   color: rgb(66 50 35 / var(--tw-text-opacity, 1));
+}
+.text-\[\#4A2D80\] {
+  --tw-text-opacity: 1;
+  color: rgb(74 45 128 / var(--tw-text-opacity, 1));
 }
 .text-\[\#5A7A5A\] {
   --tw-text-opacity: 1;
@@ -1851,6 +1909,10 @@ video {
 .text-\[\#8B6914\] {
   --tw-text-opacity: 1;
   color: rgb(139 105 20 / var(--tw-text-opacity, 1));
+}
+.text-\[\#8B6C55\] {
+  --tw-text-opacity: 1;
+  color: rgb(139 108 85 / var(--tw-text-opacity, 1));
 }
 .text-\[\#8B7560\] {
   --tw-text-opacity: 1;
@@ -1917,6 +1979,9 @@ video {
 .accent-\[\#C97B4B\] {
   accent-color: #C97B4B;
 }
+.opacity-25 {
+  opacity: 0.25;
+}
 .opacity-50 {
   opacity: 0.5;
 }
@@ -1925,6 +1990,9 @@ video {
 }
 .opacity-70 {
   opacity: 0.7;
+}
+.opacity-75 {
+  opacity: 0.75;
 }
 .shadow-2xl {
   --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
@@ -2178,6 +2246,10 @@ video {
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
 }
 
+.focus\:ring-inset:focus {
+  --tw-ring-inset: inset;
+}
+
 .focus\:ring-\[\#2D6A4F\]:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(45 106 79 / var(--tw-ring-opacity, 1));
@@ -2315,6 +2387,10 @@ video {
 
   .sm\:w-full {
     width: 100%;
+  }
+
+  .sm\:max-w-lg {
+    max-width: 32rem;
   }
 
   .sm\:max-w-md {

@@ -97,10 +97,23 @@ class ApiClient {
         body: JSON.stringify({ circleCode, passcode }),
       });
     } catch {
-      // Demo authentication simulation
-      const member = this.inMemoryMembers[0];
+      // Demo authentication: match passcode to role for the shared demo circle.
+      // Each member has a distinct demo passcode so reviewers can experience every role.
+      //   Elder      → 111111  (Savitri Devi)
+      //   Caretaker  → 222222  (Rajesh Sharma)
+      //   Family     → 333333  (Priya Sharma)
+      //   Doctor     → 444444  (Dr. Anand Mehta)
+      // Any other passcode defaults to the elder view.
+      const demoPasscodeMap: Record<string, number> = {
+        '111111': 0, // elder
+        '222222': 1, // caretaker
+        '333333': 2, // family
+        '444444': 3, // doctor
+      };
+      const memberIndex = demoPasscodeMap[passcode.trim()] ?? 0;
+      const member = this.inMemoryMembers[memberIndex] ?? this.inMemoryMembers[0];
       return {
-        token: 'demo-jwt-token-savitri',
+        token: `demo-jwt-token-${member.role}`,
         member,
         circle: mockCircle,
       };
